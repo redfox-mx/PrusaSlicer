@@ -103,6 +103,8 @@ ExtrudeConfig::ExtrudeConfig(const Domain::ConfigView& config) :
     gcode_comments{config.get<bool>("gcode_comments")},
     arc_fitting{config.get<Domain::ArcFittingType>("arc_fitting")},
     scarf_seam_placement{config.get<Domain::ScarfSeamPlacement>("scarf_seam_placement")},
+    top_fill_pattern{config.get<Domain::InfillPattern>("top_fill_pattern")},
+    bottom_fill_pattern{config.get<Domain::InfillPattern>("bottom_fill_pattern")},
     only_retract_when_crossing_perimeters{
         config.get<bool>("only_retract_when_crossing_perimeters")
     },

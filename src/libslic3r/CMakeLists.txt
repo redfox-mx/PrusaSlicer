@@ -207,6 +207,8 @@ set(SLIC3R_SOURCES
     src/libslic3r/GCode/ModelVisibility.hpp
     src/libslic3r/GCode/PostProcessor.cpp
     src/libslic3r/GCode/PostProcessor.hpp
+    src/libslic3r/GCode/PchipInterpolatorHelper.cpp
+    src/libslic3r/GCode/PchipInterpolatorHelper.hpp
     src/libslic3r/GCode/PressureEqualizer.cpp
     src/libslic3r/GCode/PressureEqualizer.hpp
     src/libslic3r/GCode/PrintExtents.cpp
@@ -233,6 +235,8 @@ set(SLIC3R_SOURCES
     src/libslic3r/GCode/SeamScarf.hpp
     src/libslic3r/GCode/SeamShells.cpp
     src/libslic3r/GCode/SeamShells.hpp
+    src/libslic3r/GCode/SmallAreaInfillFlowCompensator.cpp
+    src/libslic3r/GCode/SmallAreaInfillFlowCompensator.hpp
     src/libslic3r/GCode/SmoothPath.cpp
     src/libslic3r/GCode/SmoothPath.hpp
     src/libslic3r/GCode/SpiralVase.cpp

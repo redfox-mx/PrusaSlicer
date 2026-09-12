@@ -252,6 +252,8 @@ void AbstractConfigManipulation::toggle_print_fff_options(DynamicPrintConfig* co
     bool has_infill_anchors = have_infill && config->option<ConfigOptionFloatOrPercent>("infill_anchor_max")->value > 0;
     toggle_field("infill_anchor", has_infill_anchors);
 
+    toggle_field("small_area_infill_flow_compensation_model", config->opt_bool("small_area_infill_flow_compensation"));
+
     bool has_spiral_vase         = config->opt_bool("spiral_vase");
     bool has_top_solid_infill 	 = config->opt_int("top_solid_layers") > 0;
     bool has_bottom_solid_infill = config->opt_int("bottom_solid_layers") > 0;

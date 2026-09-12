@@ -84,6 +84,8 @@ struct ExtrudeConfig
     bool gcode_comments{};
     Domain::ArcFittingType arc_fitting{};
     Domain::ScarfSeamPlacement scarf_seam_placement{};
+    Domain::InfillPattern top_fill_pattern{};
+    Domain::InfillPattern bottom_fill_pattern{};
 
     bool only_retract_when_crossing_perimeters{};
     bool avoid_crossing_perimeters{};

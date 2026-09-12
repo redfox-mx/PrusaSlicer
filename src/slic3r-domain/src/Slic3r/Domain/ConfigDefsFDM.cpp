@@ -3621,6 +3621,42 @@ void fdm_config_init_fn(ConfigDefinitions& defs)
     def->max = 1000;
     def->init_fn = init_with(5);
 
+    def = defs.add("small_area_infill_flow_compensation", typeid(bool));
+    def->location = Print;
+    def->label = L("Small area flow compensation");
+    def->option_group = ConfigItemDef::OptionGroup::Print_Infill_Advanced;
+    def->category = ConfigItemDef::Category::Print_Infill;
+    def->order = 10;
+    def->gui_type = ConfigItemDef::GUIType::checkbox;
+    def->tooltip = L("Enable flow compensation for small infill areas.");
+    def->init_fn = init_with(false);
+
+    def = defs.add("small_area_infill_flow_compensation_model", typeid(std::vector<std::string>));
+    def->location = Print;
+    def->label = L("Flow compensation model");
+    def->option_group = ConfigItemDef::OptionGroup::Print_Infill_Advanced;
+    def->category = ConfigItemDef::Category::Print_Infill;
+    def->order = 11;
+    def->gui_type = ConfigItemDef::GUIType::textfield;
+    def->multiline = true;
+    def->full_width = true;
+    def->height = 10;
+    def->tooltip = L("Flow Compensation Model, used to adjust the flow for small infill areas. "
+                   "The model is expressed as a comma separated pair of values for extrusion length and "
+                   "flow correction factor per line, for example: 0,0 \\n 0.2,0.4444 \\n 10,1");
+    def->init_fn = init_with(std::vector<std::string>{
+        "0,0",
+        "0.2,0.4444",
+        "0.4,0.6145",
+        "0.6,0.7059",
+        "0.8,0.7619",
+        "1.5,0.8571", 
+        "2,0.8889",
+        "3,0.9231",
+        "5,0.9520",
+        "10,1"
+    });
+
     def = defs.add("small_perimeter_speed", typeid(FloatOrPercentage));
     def->location = Print;
     def->overrides_in = Locations{ Tool, Object, Volume };

@@ -93,6 +93,7 @@ struct SurfaceFillParams
 
 	// Index of this entry in a linear vector.
     size_t 			idx = 0;
+    double 			object_extrusion_ratio{};
 
 
 	bool operator<(const SurfaceFillParams &rhs) const {
@@ -116,6 +117,7 @@ struct SurfaceFillParams
 		RETURN_COMPARE_NON_EQUAL(flow.height());
 		RETURN_COMPARE_NON_EQUAL(flow.nozzle_diameter());
 		RETURN_COMPARE_NON_EQUAL_TYPED(unsigned, bridge);
+		RETURN_COMPARE_NON_EQUAL(object_extrusion_ratio);
 		return this->extrusion_role.lower(rhs.extrusion_role);
 	}
 
@@ -132,6 +134,7 @@ struct SurfaceFillParams
 				this->anchor_length  	== rhs.anchor_length    &&
 				this->anchor_length_max == rhs.anchor_length_max &&
 				this->flow 				== rhs.flow 			&&
+				this->object_extrusion_ratio == rhs.object_extrusion_ratio &&
 				this->extrusion_role	== rhs.extrusion_role;
 	}
 };
@@ -173,6 +176,7 @@ std::vector<SurfaceFill> group_fills(const Layer &layer)
 		        params.extruder 	 = layerm.region().extruder(extrusion_role);
 		        params.pattern 		 = layerm.region().extruder_config_value<Domain::InfillPattern>("fill_pattern", extrusion_role);
 		        params.density       = float(region.extruder_config_value<Domain::Percentage>("fill_density", FlowRole::frInfill).value);
+		        params.object_extrusion_ratio = region_config.get<double>("object_extrusion_ratio");
 
 		        if (surface.is_solid()) {
 		            params.density = 100.f;
@@ -770,6 +774,7 @@ void Layer::make_ironing()
 		double 		height;
 		double 		speed;
 		double 		angle;
+		double 		object_extrusion_ratio{};
 
 		bool operator<(const IroningParams &rhs) const {
 			if (this->extruder < rhs.extruder)
@@ -796,13 +801,17 @@ void Layer::make_ironing()
 				return true;
 			if (this->angle > rhs.angle)
 				return false;
+			if (this->object_extrusion_ratio < rhs.object_extrusion_ratio)
+				return true;
+			if (this->object_extrusion_ratio > rhs.object_extrusion_ratio)
+				return false;
 			return false;
 		}
 
 		bool operator==(const IroningParams &rhs) const {
 			return this->extruder == rhs.extruder && this->just_infill == rhs.just_infill &&
 				   this->line_spacing == rhs.line_spacing && this->height == rhs.height && this->speed == rhs.speed &&
-				   this->angle == rhs.angle;
+				   this->angle == rhs.angle && this->object_extrusion_ratio == rhs.object_extrusion_ratio;
 		}
 
 		LayerRegion *layerm;
@@ -851,6 +860,7 @@ void Layer::make_ironing()
 				ironing_params.height 		= config.get<Domain::Percentage>("ironing_flowrate").get_abs_value(default_layer_height);
 				ironing_params.speed 		= config.get<double>("ironing_speed");
 				ironing_params.angle 		= config.get<double>("fill_angle") * M_PI / 180.;
+				ironing_params.object_extrusion_ratio = config.get<double>("object_extrusion_ratio");
 				ironing_params.layerm 		= layerm;
 				ironing_params.region_id    = region_id;
 				by_extruder.emplace_back(ironing_params);

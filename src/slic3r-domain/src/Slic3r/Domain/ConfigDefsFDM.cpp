@@ -1028,6 +1028,20 @@ void fdm_config_init_fn(ConfigDefinitions& defs)
     def->max = 2;
     def->init_fn = init_with(1.);
 
+    def = defs.add("object_extrusion_ratio", typeid(double));
+    def->location = Print;
+    def->overrides_in = Locations{ Object, Volume };
+    def->label = L("Extrusion ratio");
+    def->option_group = ConfigItemDef::OptionGroup::Print_ExtrusionRetraction_Extrusion;
+    def->category = ConfigItemDef::Category::Print_ExtrusionRetraction;
+    def->order = 1;
+    def->gui_type = ConfigItemDef::GUIType::textfield;
+    def->tooltip = L("Relative extrusion ratio factor for the selected object or modifier volume. 1.0 represents 100% (the filament default). Values like 1.05 or 0.95 increase or decrease flow by 5%.");
+    def->units = {L("")};
+    def->min = 0;
+    def->max = 2;
+    def->init_fn = init_with(1.0);
+
     def = defs.add("extrusion_width", typeid(FloatOrPercentage));
     def->location = Print;
     def->overrides_in = Locations{ Tool, Object };

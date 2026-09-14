@@ -384,6 +384,7 @@ const std::map<std::string, std::vector<Step>> invalidated_by{
     {"notes", steps({propagate(psGCodeExport)})},
     {"nozzle_diameter", steps({propagate(posSlice)})},
     {"nozzle_high_flow", steps({propagate(psGCodeExport)})},
+    {"object_extrusion_ratio", steps({propagate(posPerimeters)})},
     {"only_one_perimeter_first_layer", steps({propagate(posPerimeters)})},
     {"only_retract_when_crossing_perimeters", steps({propagate(psGCodeExport)})},
     {"ooze_prevention", steps({propagate(psSkirtBrim)})},

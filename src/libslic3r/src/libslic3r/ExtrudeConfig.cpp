@@ -22,6 +22,7 @@ ExtrudeConfig::ExtrudeConfig(const Domain::ConfigView& config) :
         config.get<std::vector<Domain::FloatOrPercentage>>("external_perimeter_speed")
     },
     bridge_speed{config.get<std::vector<double>>("bridge_speed")},
+    object_extrusion_ratio{config.get<double>("object_extrusion_ratio")},
     gap_fill_speed{config.get<std::vector<double>>("gap_fill_speed")},
     retract_speed{config.get<std::vector<double>>("retract_speed")},
     retract_lift{config.get<std::vector<double>>("retract_lift")},

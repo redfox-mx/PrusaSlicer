@@ -670,6 +670,10 @@ inline bool has_compatible_layer_regions(const PrintRegionConfigView &config, co
         return false;
     }
 
+    if (config.get<double>("object_extrusion_ratio") != other_config.get<double>("object_extrusion_ratio")) {
+        return false;
+    }
+
     const int extruder_id{extruder == 0 ? 0 : extruder - 1};
 
     const auto extrusion_width{

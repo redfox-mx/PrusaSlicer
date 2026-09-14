@@ -23,6 +23,7 @@ struct ExtrudeConfig
     std::vector<Domain::FloatOrPercentage> solid_infill_speed{};
     std::vector<Domain::FloatOrPercentage> external_perimeter_speed{};
     std::vector<double> bridge_speed{};
+    double object_extrusion_ratio{};
     std::vector<double> gap_fill_speed{};
     std::vector<double> retract_speed{};
     std::vector<double> retract_lift{};

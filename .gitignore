@@ -29,3 +29,8 @@ CMakeUserPresets.json
 .aider*
 /src/slic3r-shared/imgui.ini
 /cmake-build-*/
+
+/OrcaSlicer
+/resources/presets/redfox
+.agents
+doc/presets
